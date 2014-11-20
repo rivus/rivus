@@ -1,0 +1,11 @@
+{
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "maxlen": 79,
+  "mocha": true,
+  "node": true,
+  "undef": true,
+  "unused": true
+}
