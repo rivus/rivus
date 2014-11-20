@@ -11,9 +11,10 @@ function createComponent(options) {
   var update = loop.update;
 
   options.stream
-    .scan(mergeState, seed)
+    .scan(seed, mergeState)
     .skipDuplicates(immutable.is)
-    .onValue(updateState);
+    .doAction(updateState)
+    .subscribe();
 
   return loop.target;
 

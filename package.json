@@ -1,6 +1,6 @@
 {
   "name": "rivus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Juan Placencia",
   "description": " ",
   "main": "./index.js",
@@ -11,7 +11,7 @@
     "homepage": "https://github.com/rivus/rivus"
   },
   "dependencies": {
-    "kefir": "^0.3.0",
+    "baconjs": "^0.7.33",
     "getobject": "^0.1.0",
     "immutable": "^3.2.1",
     "lodash-node": "^2.4.1",

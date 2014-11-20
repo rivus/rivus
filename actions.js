@@ -1,6 +1,6 @@
 'use strict';
 
-var kefir = require('kefir');
+var bacon = require('baconjs');
 var getobject = require('getobject');
 var immutable = require('immutable');
 var isArray = require('lodash-node/modern/objects/isArray');
@@ -9,7 +9,7 @@ var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
 module.exports = createActions;
 
 function createActions(actionList) {
-  var emitter = kefir.emitter();
+  var emitter = new bacon.Bus();
   var actions = {};
 
   actionList.reduce(addAction, {emitter: emitter, actions: actions});
@@ -22,7 +22,7 @@ function addAction(options, action) {
   var stream = emitter.filter(verifyAction).map(getData);
 
   stream.dispatch = function(data) {
-    emitter.emit({action: action, data: data});
+    emitter.push({action: action, data: data});
   };
   getobject.set(options.actions, action, stream);
 
