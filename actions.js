@@ -43,22 +43,9 @@ function getData(message) {
 }
 
 function makeGetDataAsImmutable() {
-  var isArray = require('lodash-node/modern/objects/isArray');
-  var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
-  var list = require('./list');
-  var map = require('./map');
+  var immutable = require('immutable');
 
   return function(message) {
-    var data = message.data;
-
-    if(isArray(data)) {
-      return list.merge(data);
-    }
-    else if(isPlainObject(data)) {
-      return map.merge(data);
-    }
-    else {
-      return data;
-    }
+    return immutable.fromJS(message.data);
   };
 }
