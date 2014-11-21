@@ -36,7 +36,7 @@ function getData(message) {
   var data = message.data;
 
   if(isArray(data)) {
-    data = list.concat(data);
+    data = list.merge(data);
   }
   else if(isPlainObject(data)) {
     data = map.merge(data);
