@@ -2,21 +2,29 @@
 
 var bacon = require('baconjs');
 var getobject = require('getobject');
-var isArray = require('lodash-node/modern/objects/isArray');
-var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
 
 module.exports = createActions;
 
-function createActions(actionList) {
+function createActions(actionList, options) {
+  options = options || {};
   var emitter = new bacon.Bus();
   var actions = {};
-  actionList.reduce(addAction, {emitter: emitter, actions: actions});
+  var plucker = options.immutable ? makeGetDataAsImmutable() : getData;
+
+  actionList.reduce(addAction, {
+    emitter: emitter,
+    actions: actions,
+    plucker: plucker
+  });
+
   return actions;
 }
 
 function addAction(options, action) {
   var emitter = options.emitter;
-  var stream = emitter.filter(verifyAction).map(getData);
+  var stream = emitter
+    .filter(verifyAction)
+    .map(options.plucker);
 
   stream.dispatch = function(data) {
     emitter.push({action: action, data: data});
@@ -32,4 +40,25 @@ function addAction(options, action) {
 
 function getData(message) {
   return message.data;
+}
+
+function makeGetDataAsImmutable() {
+  var isArray = require('lodash-node/modern/objects/isArray');
+  var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
+  var list = require('./list');
+  var map = require('./map');
+
+  return function() {
+    var data = message.data;
+
+    if(isArray(data)) {
+      return list.merge(data);
+    }
+    else if(isPlainObject(data)) {
+      return map.merge(data);
+    }
+    else {
+      return data;
+    }
+  };
 }
