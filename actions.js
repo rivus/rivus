@@ -5,15 +5,15 @@ var getobject = require('getobject');
 var immutable = require('immutable');
 var isArray = require('lodash-node/modern/objects/isArray');
 var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
+var emptyList = immutable.List();
+var emptyMap = immutable.Map();
 
 module.exports = createActions;
 
 function createActions(actionList) {
   var emitter = new bacon.Bus();
   var actions = {};
-
   actionList.reduce(addAction, {emitter: emitter, actions: actions});
-
   return actions;
 }
 
@@ -37,10 +37,10 @@ function getData(message) {
   var data = message.data;
 
   if(isArray(data)) {
-    data = immutable.List(data);
+    data = emptyList.merge(data);
   }
   else if(isPlainObject(data)) {
-    data = immutable.Map(data);
+    data = emptyMap.merge(data);
   }
 
   return data;
