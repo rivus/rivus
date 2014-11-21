@@ -2,12 +2,12 @@
 
 var immutable = require('immutable');
 var mainLoop = require('main-loop');
-var emptyMap = immutable.Map();
+var map = require('./map');
 
 module.exports = createComponent;
 
 function createComponent(options) {
-  var seed = emptyMap.merge(options.seed);
+  var seed = map.merge(options.seed);
   var loop = mainLoop(seed, options.template);
   var update = loop.update;
 

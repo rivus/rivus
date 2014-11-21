@@ -2,11 +2,10 @@
 
 var bacon = require('baconjs');
 var getobject = require('getobject');
-var immutable = require('immutable');
 var isArray = require('lodash-node/modern/objects/isArray');
 var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
-var emptyList = immutable.List();
-var emptyMap = immutable.Map();
+var list = require('./list');
+var map = require('./map');
 
 module.exports = createActions;
 
@@ -37,10 +36,10 @@ function getData(message) {
   var data = message.data;
 
   if(isArray(data)) {
-    data = emptyList.merge(data);
+    data = list.concat(data);
   }
   else if(isPlainObject(data)) {
-    data = emptyMap.merge(data);
+    data = map.merge(data);
   }
 
   return data;
