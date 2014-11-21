@@ -4,8 +4,6 @@ var bacon = require('baconjs');
 var getobject = require('getobject');
 var isArray = require('lodash-node/modern/objects/isArray');
 var isPlainObject = require('lodash-node/modern/objects/isPlainObject');
-var list = require('./list');
-var map = require('./map');
 
 module.exports = createActions;
 
@@ -33,14 +31,5 @@ function addAction(options, action) {
 }
 
 function getData(message) {
-  var data = message.data;
-
-  if(isArray(data)) {
-    data = list.merge(data);
-  }
-  else if(isPlainObject(data)) {
-    data = map.merge(data);
-  }
-
-  return data;
+  return message.data;
 }
