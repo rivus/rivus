@@ -48,7 +48,7 @@ function makeGetDataAsImmutable() {
   var list = require('./list');
   var map = require('./map');
 
-  return function() {
+  return function(message) {
     var data = message.data;
 
     if(isArray(data)) {
