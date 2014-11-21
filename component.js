@@ -2,6 +2,7 @@
 
 var immutable = require('immutable');
 var mainLoop = require('main-loop');
+var noop = require('lodash-node/modern/utilities/noop');
 var map = require('./map');
 
 module.exports = createComponent;
@@ -15,7 +16,7 @@ function createComponent(options) {
     .scan(seed, mergeState)
     .skipDuplicates(immutable.is)
     .doAction(updateState)
-    .subscribe();
+    .subscribe(noop);
 
   return loop.target;
 
