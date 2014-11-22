@@ -1,22 +1,20 @@
 'use strict';
 
-var immutable = require('immutable');
 var mainLoop = require('main-loop');
-var noop = require('lodash-node/modern/utilities/noop');
-var map = require('./map');
+var isEqual = require('lodash-node/modern/objects/isEqual');
+var merge = require('lodash-node/modern/objects/merge');
 
 module.exports = createComponent;
 
 function createComponent(options) {
-  var seed = map.merge(options.seed);
+  var seed = merge({}, options.seed);
   var loop = mainLoop(seed, options.template);
   var update = loop.update;
 
   options.stream
     .scan(seed, mergeState)
-    .skipDuplicates(immutable.is)
-    .doAction(updateState)
-    .subscribe(noop);
+    .skipDuplicates(isEqual)
+    .onValue(updateState);
 
   return loop.target;
 
@@ -26,5 +24,5 @@ function createComponent(options) {
 }
 
 function mergeState(previous, current) {
-  return previous.merge(current);
+  return merge({}, previous, current);
 }

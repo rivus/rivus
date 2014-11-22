@@ -2,6 +2,7 @@
 
 var bacon = require('baconjs');
 var getobject = require('getobject');
+var immutable = require('immutable');
 
 module.exports = createActions;
 
@@ -9,22 +10,15 @@ function createActions(actionList, options) {
   options = options || {};
   var emitter = new bacon.Bus();
   var actions = {};
-  var plucker = options.immutable ? makeGetDataAsImmutable() : getData;
 
-  actionList.reduce(addAction, {
-    emitter: emitter,
-    actions: actions,
-    plucker: plucker
-  });
+  actionList.reduce(addAction, {emitter: emitter, actions: actions});
 
   return actions;
 }
 
 function addAction(options, action) {
   var emitter = options.emitter;
-  var stream = emitter
-    .filter(verifyAction)
-    .map(options.plucker);
+  var stream = emitter.filter(verifyAction).map(getData);
 
   stream.dispatch = function(data) {
     emitter.push({action: action, data: data});
@@ -39,13 +33,5 @@ function addAction(options, action) {
 }
 
 function getData(message) {
-  return message.data;
-}
-
-function makeGetDataAsImmutable() {
-  var immutable = require('immutable');
-
-  return function(message) {
-    return immutable.fromJS(message.data);
-  };
+  return immutable.fromJS(message.data);
 }
