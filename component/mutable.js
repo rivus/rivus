@@ -11,10 +11,12 @@ function createComponent(options) {
   var loop = mainLoop(seed, options.template);
   var update = loop.update;
 
-  options.stream
-    .scan(seed, mergeState)
-    .skipDuplicates(isEqual)
-    .onValue(updateState);
+  if(options.stream) {
+    options.stream
+      .scan(seed, mergeState)
+      .skipDuplicates(isEqual)
+      .onValue(updateState);
+  }
 
   return loop.target;
 
