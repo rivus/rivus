@@ -99,7 +99,7 @@ var bacon = require('rivus/lib/bacon');
 var createComponent = require('rivus/mutable/component');
 var h = require('virtual-hyperscript');
 var taskStore = require('../stores/task');
-var userStore = require('../stores/user);
+var userStore = require('../stores/user');
 
 var stream = bacon.combineTemplate({
   user: userStore,
