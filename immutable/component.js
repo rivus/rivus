@@ -2,7 +2,7 @@
 
 var immutable = require('immutable');
 var mainLoop = require('main-loop');
-var map = require('../immutable/map');
+var map = require('./map');
 
 module.exports = createComponent;
 

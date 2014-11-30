@@ -5,8 +5,7 @@ var getobject = require('getobject');
 
 module.exports = createActions;
 
-function createActions(actionList, options) {
-  options = options || {};
+function createActions(actionList) {
   var emitter = new bacon.Bus();
   var actions = {};
 

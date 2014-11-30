@@ -6,8 +6,7 @@ var immutable = require('immutable');
 
 module.exports = createActions;
 
-function createActions(actionList, options) {
-  options = options || {};
+function createActions(actionList) {
   var emitter = new bacon.Bus();
   var actions = {};
 
@@ -18,7 +17,7 @@ function createActions(actionList, options) {
 
 function addAction(options, action) {
   var emitter = options.emitter;
-  var stream = emitter.filter(verifyAction).map(getData);
+  var stream = emitter.filter(verifyAction).map(immutable.fromJS);
 
   stream.dispatch = function(data) {
     emitter.push({action: action, data: data});
@@ -30,8 +29,4 @@ function addAction(options, action) {
   function verifyAction(message) {
     return message.action === action;
   }
-}
-
-function getData(message) {
-  return immutable.fromJS(message.data);
 }
