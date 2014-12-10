@@ -1,9 +1,8 @@
 {
   "name": "rivus",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "author": "Juan Placencia",
   "description": " ",
-  "main": "./index.js",
   "license": "MIT",
   "homepage": "https://github.com/rivus/rivus",
   "repository": {
@@ -11,9 +10,8 @@
     "homepage": "https://github.com/rivus/rivus"
   },
   "dependencies": {
-    "baconjs": "^0.7.33",
+    "rx": "^2.3.20",
     "getobject": "^0.1.0",
-    "immutable": "^3.2.1",
     "lodash-node": "^2.4.1",
     "main-loop": "^2.3.0"
   }

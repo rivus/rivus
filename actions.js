@@ -1,12 +1,12 @@
 'use strict';
 
-var bacon = require('baconjs');
+var rx = require('./rx');
 var getobject = require('getobject');
 
 module.exports = createActions;
 
 function createActions(actionList, options) {
-  var emitter = new bacon.Bus();
+  var emitter = new rx.Subject();
   var actions = {};
 
   actionList.reduce(addAction, {
@@ -31,7 +31,7 @@ function addAction(options, action) {
   return options;
 
   function dispatch(data) {
-    emitter.push({action: action, data: data});
+    emitter.onNext({action: action, data: data});
   }
 
   function verifyAction(message) {
