@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('rx/rx.lite');
+module.exports = require('rx/dist/rx.lite');
