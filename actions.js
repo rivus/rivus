@@ -1,12 +1,12 @@
 'use strict';
 
-var rx = require('./rx');
+var kefir = require('kefir');
 var getobject = require('getobject');
 
 module.exports = createActions;
 
 function createActions(actionList, options) {
-  var emitter = new rx.Subject();
+  var emitter = kefir.emitter();
   var actions = {};
 
   actionList.reduce(addAction, {
@@ -31,7 +31,7 @@ function addAction(options, action) {
   return options;
 
   function dispatch(data) {
-    emitter.onNext({action: action, data: data});
+    emitter.emit({action: action, data: data});
   }
 
   function verifyAction(message) {

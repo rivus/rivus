@@ -6,4 +6,4 @@
 Rivus is a collection of utilities to help provide an implementation of the
 [Flux architecture](http://facebook.github.io/flux/docs/overview.html) driven
 by [FRP](http://en.wikipedia.org/wiki/Functional_reactive_programming) using
-[Highland](http://highlandjs.org/).
+[Kefir](http://pozadi.github.io/kefir/).

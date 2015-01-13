@@ -1,6 +1,6 @@
 {
   "name": "rivus",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "author": "Juan Placencia",
   "description": " ",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "homepage": "https://github.com/rivus/rivus"
   },
   "dependencies": {
-    "rx": "^2.3.20",
+    "kefir": "^0.5.3",
     "getobject": "^0.1.0",
     "lodash-node": "^2.4.1",
-    "main-loop": "^2.3.0"
+    "main-loop": "^3.0.0"
   }
 }
